@@ -642,7 +642,7 @@ Imbalanced classification technique
 
   
 
-###2.1.5  Modified synthetic minority oversampling technique (MSMOTE) for imbalanced data
+### 2.1.5  Modified synthetic minority oversampling technique (MSMOTE) for imbalanced data
 It is a modified version of SMOTE. SMOTE does not consider the underlying distribution of the minority class and latent noises in the dataset. To improve the performance of SMOTE a modified method MSMOTE is used.
 
 This algorithm classifies the samples of minority classes into 3 distinct groups – Security/Safe samples, Border samples, and latent nose samples. This is done by calculating the distances among samples of the minority class and samples of the training data.
@@ -650,3 +650,45 @@ This algorithm classifies the samples of minority classes into 3 distinct groups
 Security samples are those data points which can improve the performance of a classifier. While on the other hand, noise are the data points which can reduce the performance of the classifier.  The ones which are difficult to categorize into any of the two are classified as border samples.
 
 While the basic flow of MSOMTE is the same as that of SMOTE (discussed in the previous section).  In MSMOTE the strategy of selecting nearest neighbors is different from SMOTE. The algorithm randomly selects a data point from the k nearest neighbors for the security sample, selects the nearest neighbor from the border samples and does nothing for latent noise.
+## 2.2 Algorithmic Ensemble Techniques
+The above section, deals with handling imbalanced data by resampling original data to provide balanced classes. In this section, we are going to look at an alternate approach i.e.  Modifying existing classification algorithms to make them appropriate for imbalanced data sets.
+
+The main objective of ensemble methodology is to improve the performance of single classifiers. The approach involves constructing several two stage classifiers from the original data and then aggregate their predictions.
+
+2.2.1. Bagging Based techniques for imbalanced data
+Bagging is an abbreviation of Bootstrap Aggregating. The conventional bagging algorithm involves generating ‘n’ different bootstrap training samples with replacement. And training the algorithm on each bootstrapped algorithm separately and then aggregating the predictions at the end.
+
+Bagging is used for reducing Overfitting in order to create strong learners for generating accurate predictions. Unlike boosting, bagging allows replacement in the bootstrapped sample.
+Total Observations = 1000
+
+Fraudulent   Observations =20
+
+Non Fraudulent Observations = 980
+
+Event Rate= 2 %
+
+There are 10 bootstrapped samples chosen from the population with replacement. Each sample contains 200 observations. And each sample is different from the original dataset but resembles the dataset in distribution & variability.
+
+The machine learning algorithms like logistic regression, neural networks, decision tree  are fitted to each bootstrapped sample of 200 observations. And the Classifiers c1, c2…c10 are aggregated to produce a compound classifier.  This ensemble methodology produces a stronger compound classifier since it combines the results of individual classifiers to come up with an improved one.
+- Advantages
+Improves stability & accuracy of machine learning algorithms
+Reduces variance
+Overcomes overfitting
+Improved misclassification rate of the bagged classifier
+In noisy data environments bagging outperforms boosting
+ 
+
+- Disadvantages
+Bagging works only if the base classifiers are not bad to begin with. Bagging bad classifiers can further degrade performance
+
+2.2.2. Boosting-Based techniques for imbalanced data
+Boosting is an ensemble technique to combine weak learners to create a strong learner that can make accurate predictions. Boosting starts out with a base classifier / weak classifier that is prepared on the training data.
+
+What are base learners / weak classifiers?
+
+The base learners / Classifiers are weak learners i.e. the prediction accuracy is only slightly better than average. A classifier learning algorithm is said to be weak when small changes in data induce big changes in the classification model.
+
+In the next iteration, the new classifier focuses on or places more weight to those cases which were incorrectly classified in the last round.
+
+
+ 
